@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buy stocks</title>
+</head>
+<body>
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Buy</button>
+    </form>
+{% endblock content %}
+
+</body>
+</html>

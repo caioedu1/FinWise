@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h3>Olá!!</h3>
+    {% endif %}
+
+
+    <p>{{message}}</p>
+        <form method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit">Submit</button>
+        </form>
+{% endblock content %}
