@@ -12,6 +12,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, null=True)
     password1 = models.CharField(max_length=200, null=True)
     password2 = models.CharField(max_length=200, null=True)
+    cash = models.DecimalField(max_digits=10, decimal_places=2, default=10000)
     
     groups = models.ManyToManyField(Group, related_name='custom_user_set')
     user_permissions = models.ManyToManyField(Permission, related_name='custom_user_set')
