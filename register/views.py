@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import MyUserCreationForm, MyUserLoginForm
+from django.http import HttpResponse
 
 
 
@@ -27,7 +28,7 @@ def loginUser(request):
         form = MyUserLoginForm(request.POST)
         if form.is_valid():
             user = authenticate(
-                username = form.cleaned_data['username'],
+                email = form.cleaned_data['email'],
                 password = form.cleaned_data['password']
             )
             if user is not None:

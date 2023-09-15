@@ -1,15 +1,44 @@
 {% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        {% load static %}
+        {% block styles %}
+            {{ block.super }}
+            <link rel="stylesheet" href="{% static 'login.css' %}">
+        {% endblock %}
+        <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+        <script src="{% static 'bootstrap.min.js' %}"></script>
+    </head>
+    <body>
+        {% block content %}
+            {% if request.user.is_authenticated %}
+                <h3>Olá!!</h3>
+            {% endif %}
+                
+            {% if not request.user.is_authenticated%}
+                <div class="login">
+                    <form method="POST" class="mb-3">
+                        <div class="mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">Email address</label>
+                            {{ form.email }}
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
+                            {{ form.password }}
+                        </div>
+                        <div class="mb-3 form-check">
+                            {{ form.remember_me }}
+                            <label class="form-check-label" for="{{ form.remember_me.id_for_label }}">Check me out</label>
+                        </div>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>                                 
+                </div>
+            {% endif %}
+        {% endblock content %}
+    </body>
+</html>
 
-{% block content %}
-    {% if request.user.is_authenticated %}
-        <h3>Olá!!</h3>
-    {% endif %}
-
-
-    <p>{{message}}</p>
-        <form method="POST">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <button type="submit">Submit</button>
-        </form>
-{% endblock content %}

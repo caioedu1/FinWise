@@ -1,21 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Buy stocks</title>
-</head>
-<body>
+    <head>
+        {% load static %}
+        {% block styles %}
+            <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+            <script src="{% static 'bootstrap.min.js' %}"></script>
+        {% endblock %}
+        <style>
+            .btns {
+                text-align: right; 
+                margin-top: 10px; 
+            }
+            
+            .head {
+                width: 100%;
+                height: 125px;
+                border: 1px solid #333;   
+            }
+        </style>
+    </head>
+    <body>
+        <div class="head">
+            {% if user.is_authenticated %}
+                <div class="btns">
+                    <a href='{% url "logout" %}' class="btn btn-primary btn-sm" role="button">Logout</a>
+                    <a href="{% url 'buy_stocks' %}" class="btn btn-primary btn-sm" role="button">Buy stocks</a>
+                    <a href="{% url 'sell_stocks' %}" class="btn btn-primary btn-sm" role="button">Sell stocks</a>
+                </div>
+            {% else %}
+                <div class="btns">
+                    <a href='{% url "login" %}' class="btn btn-primary btn-sm" role="button">Login</a>
+                    <a href='{% url "register" %}' class="btn btn-primary btn-sm" role="button">Register</a>
+                </div>
+            {% endif %}
+        </div>
 
-{% if user.is_authenticated %}
-    <a href='{% url "logout" %}'>Logout</a>
-{% else %}
-    <a href='{% url "login" %}'>Login</a>
-    <br>
-    <a href='{% url "register" %}'>Register</a>
-{% endif %}
 
-<a href="{% url 'buy_stocks' %}">Buy stocks</a>
-
-{% block content %}{% endblock content %}
-
-</body>
+        {% block content %}{% endblock content %}
+    </body>
 </html>
