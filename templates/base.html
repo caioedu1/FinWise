@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% load static %}
+        <link rel="stylesheet" href="{% static '/styles/base.css' %}">
         {% block styles %}
-            <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
-            <script src="{% static 'bootstrap.min.js' %}"></script>
+            <link rel="stylesheet" href="{% static '/styles/bootstrap.min.css' %}">
         {% endblock %}
-        <style>
-            .btns {
-                text-align: right; 
-                margin-top: 10px; 
-            }
-            
-            .head {
-                width: 100%;
-                height: 125px;
-                border: 1px solid #333;   
-            }
-        </style>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
     </head>
-    <body>
+    <body class="body">
         <div class="head">
+            <div class="text-fw">
+                <h1>FinWise</h1>
+                <h1>Dream Thrive Repeat</h1>
+            </div>
             {% if user.is_authenticated %}
                 <div class="btns">
                     <a href='{% url "logout" %}' class="btn btn-primary btn-sm" role="button">Logout</a>
                     <a href="{% url 'buy_stocks' %}" class="btn btn-primary btn-sm" role="button">Buy stocks</a>
                     <a href="{% url 'sell_stocks' %}" class="btn btn-primary btn-sm" role="button">Sell stocks</a>
                 </div>
-            {% else %}
-                <div class="btns">
-                    <a href='{% url "login" %}' class="btn btn-primary btn-sm" role="button">Login</a>
-                    <a href='{% url "register" %}' class="btn btn-primary btn-sm" role="button">Register</a>
+                {% else %}
+                <div class="btns2">
+                    {% if '/register' in request.path %}
+                    <a href='{% url "login" %}' class="btn btn-primary" role="button">Login</a>
+                    {% elif '/login' in request.path %}
+                    <a href='{% url "register" %}' class="btn btn-primary" role="button">Register</a>
+                    {% endif %}
                 </div>
-            {% endif %}
-        </div>
-
-
-        {% block content %}{% endblock content %}
-    </body>
+                {% endif %}
+            </div>
+            {% block content %}{% endblock content %}
+        </body>
 </html>

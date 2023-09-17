@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        {% load static %}
+        {% block styles %}
+            {{ block.super }}
+            <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+            <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
+        {% endblock %}
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    </head>
+    <body>
+        {% block content %}
+            <div class="login">
+                <h3 style="color: white;">Login</h3>
+                <form method="POST" class="mb-3">
+                    <div class="mb-3">
+                        <label for="{{ form.email.id_for_label }}" class="form-label" style="color: white;">
+                            Email address
+                        </label>
+                        {{ form.email }}
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.password.id_for_label }}" class="form-label" style="color: white;">
+                            Password
+                        </label>
+                        {{ form.password }}
+                    </div>
+                    <div class="mb-3 form-check">
+                        {{ form.remember_me }}
+                        <label class="form-check-label" for="{{ form.remember_me.id_for_label }}" style="color: white;">
+                            Check me out
+                        </label>
+                    </div>
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary" style="color: white;">
+                        Login
+                    </button>
+                </form>                                 
+            </div>
+        {% endblock content %}
+    </body>
+</html>
+

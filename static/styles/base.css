@@ -1,0 +1,57 @@
+/* Body */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(95deg, black, rgba(10, 10, 10, 0.8)); 
+}
+
+/* Buttons */
+.btns {
+    text-align: right; 
+    margin-top: 10px; 
+}
+
+.btns2 {
+    text-align: right;
+    margin-top: -100px;
+    margin-right: 10px;
+}
+
+
+/* Text Title*/
+@keyframes rainbow-text {
+    0% {
+        color: #000000;
+    }
+    10% {
+        color: rgb(65, 65, 65);
+    }
+    25% {
+        color: #666666;
+    }
+    35% {
+        color: rgb(163, 163, 163)
+    }
+    50% {
+        color: #ffffff;
+    }
+    60% {
+        color: rgb(163, 163, 163);
+    }
+    75% {
+        color:#666666;
+    }
+    85% {
+        color: rgb(65, 65, 65);
+    }
+    100% {
+        color: #000000;
+    }
+}
+
+.text-fw {
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(68, 68, 68, 0.3);
+    animation: rainbow-text 20s linear infinite;
+}

@@ -25,9 +25,6 @@ def buy_stocks(request):
         user_id = request.user.id
 
         if form.is_valid():
-            # api key
-            api_key = "QU6DJSHXR4MROQYO"
-
             # Define stock symbol and quantity
             stock_symbol = form.cleaned_data["stock_symbol"]
             stock_symbol = stock_symbol.upper()
@@ -100,7 +97,7 @@ def buy_stocks(request):
         else:
             messages.error(request, "An error has occurred")
     else:
-        return render(request, "stocks/buy_stocks.html", context={"form": form})
+        return render(request, "buy_stocks.html", context={"form": form})
 
 
 @login_required
@@ -181,4 +178,4 @@ def sell_stocks(request):
         else:
             messages.error(request, "An error has occurred")
     else:
-        return render(request, "stocks/sell_stocks.html", context={"form": form})
+        return render(request, "sell_stocks.html", context={"form": form})

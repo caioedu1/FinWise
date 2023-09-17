@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        {% load static %}
+        {% block styles %}
+            {{ block.super }}
+            <link rel="stylesheet" href="{% static '/styles/signup.css' %}">
+            <link rel="stylesheet" href="{% static '/styles/bootstrap.min.css' %}">
+        {% endblock %}
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    </head>
+    <body>
+      {% block content %}
+        <div class="signup">
+          <h3 style="color: white;">Sign Up</h3>
+          <form method="POST" class="mb-3">
+            <div class="row">
+              <div class="col">
+                <label for="{{ form.name.id }}"></label>
+                  {{ form.name }}
+              </div>
+
+              <div class="col">
+                <label for="{{ form.username.id }}"></label>
+                {{ form.username }}
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <label for="{{ form.email.id }}"></label>
+              {{ form.email }}
+              <div class="form-text" style="color: white;">
+                We'll never share your email with anyone else.
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col">
+                <label for="{{ form.password1.id }}"></label>
+                {{ form.password1 }}
+                
+              </div>
+              
+              <div class="col">
+                <label for="{{ form.password2.id }}"></label>
+                {{ form.password2 }}
+              </div>
+              
+            </div>
+            
+            {% csrf_token %}
+            <br>
+            {% if form.errors %}
+              <div class="alert alert-danger">
+                  {% for field_name, errors in form.errors.items %}
+                    {% for error in errors %}
+                      <li>{{ error }}</li>
+                    {% endfor %}
+                  {% endfor %}
+              </div>
+            {% endif %}
+          
+          
+            <button type="submit" class="btn btn-primary">Register</button>
+
+          </form>    
+        </div>
+        {% endblock content %}
+      </body>
+      </html>
+      
+
