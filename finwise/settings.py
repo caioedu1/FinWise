@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'register.apps.RegisterConfig',
-    'stocks.apps.StocksConfig'
+    'stocks.apps.StocksConfig',
+    'chat.apps.ChatConfig',
 ]
 
 MIDDLEWARE = [

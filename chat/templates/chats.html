@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        {% load static %}
+        {% block styles %}
+            {{ block.super }}
+            <link rel="stylesheet" href="{% static '/styles/chats.css' %}">
+            <link rel="stylesheet" href="{% static '/styles/bootstrap.min.css' %}">
+        {% endblock %}
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    </head>
+    <body>
+        {% block content %}
+            <h3> Olá <h3>
+            <form method="POST" class="mb-3">
+                {{ form }}
+            </form>
+        {% endblock content %}
+    </body>
+</html>
