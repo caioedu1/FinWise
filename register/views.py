@@ -6,6 +6,7 @@ from .forms import MyUserCreationForm, MyUserLoginForm
 from django.http import HttpResponse
 from .decorators import login_forbidden
 from .models import User
+from chat.models import Topic
 
 
 @login_forbidden
@@ -50,3 +51,12 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+    rooms = user.room_set.all()
+    room_messages = user.message_set.all()
+    topics = Topic.objects.all()
+    context = {'user': user, 'rooms':rooms, 'room_messages': room_messages, 'topics': topics}
+    return render(request, 'base/profile.html', context)

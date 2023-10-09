@@ -1,22 +1,60 @@
 {% extends 'base.html' %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Login</title>
-        {% load static %}
-        {% block styles %}
-            {{ block.super }}
-            <link rel="stylesheet" href="{% static '/styles/chats.css' %}">
-            <link rel="stylesheet" href="{% static '/styles/bootstrap.min.css' %}">
-        {% endblock %}
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    </head>
-    <body>
-        {% block content %}
-            <h3> Olá <h3>
-            <form method="POST" class="mb-3">
-                {{ form }}
+<head>
+    <title>Login</title>
+    {% load static %}
+    {% block styles %}
+        {{ block.super }}
+        <link rel="stylesheet" href="{% static 'styles/chats.css' %}">
+        <link rel="stylesheet" href="{% static '/styles/bootstrap.min.css' %}">
+        <style>
+            .form__group {
+                margin-bottom: 15px;
+            }
+
+            .form__group label {
+                display: block;
+                color: white;
+                margin-bottom: 5px;
+            }
+        </style>
+    {% endblock %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    {% block content %}
+        <div class="chats">
+            <form class="form" action="" method="POST">
+                <div class="form__group">
+                    <label for="room_topic" style="color: black;">Room Topic</label>
+                    <input required type="text" value="{{ room.topic.name }}" name="topic" list="topic-list">
+                    <datalist id="topic-list">
+                        <select id="room_topic" name="topic">
+                            {% for topic in topics %}
+                                <option value="{{ topic.id }}">{{ topic.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </datalist>
+                </div>
+                
+                <div class="form__group">
+                    <label for="room_name" style="color: black;">Room Name</label>
+                    <input type="text" name="name">
+                </div>
+
+                <div class="form__group">
+                    <label for="room_description" style="color: black;">Room Description</label>
+                    <textarea name="description"></textarea>
+                </div>
+                
+                <div class="form__action">
+                    <a class="btn btn-primary btn-sm" href="stock">Cancel</a>
+                    <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+                </div>
+                {% csrf_token %}
             </form>
+        </div>
         {% endblock content %}
-    </body>
+</body>
 </html>

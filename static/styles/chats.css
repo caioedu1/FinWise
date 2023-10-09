@@ -1,0 +1,14 @@
+.chats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    margin: 0;
+}
+
+.mb-3 {
+    color: white
+}
+
+

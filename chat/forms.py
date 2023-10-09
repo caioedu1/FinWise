@@ -1,8 +1,13 @@
-from .models import User
+from .models import User, Room
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.forms import ModelForm
+from .models import Topic
+
 #-----------------------------------------------------#
 
-class CreateRoom(forms.Form):
-    name = forms.CharField(required=True, max_length=100)
-    description = forms.CharField(required=False, max_length=1000)
+
+class CreateRoom(ModelForm):
+     class Meta:
+        model = Room
+        fields = ['topic', 'name', 'description']

@@ -1,0 +1,63 @@
+/* Styles for Topics Section */
+.topics {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.topics__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.topics__header h2 {
+    margin: 0;
+}
+
+.topics__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.topics__list li {
+    margin-bottom: 10px;
+}
+
+.topics__list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.topics__list a.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.topics__list a:hover {
+    background-color: #f0f0f0;
+}
+
+.btn--link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.btn--link svg {
+    margin-left: 5px;
+}

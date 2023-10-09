@@ -1,57 +1,70 @@
-/* Body */
-body {
+/* Reset some default browser styles */
+body, h1, h2, p {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    background: linear-gradient(95deg, black, rgba(10, 10, 10, 0.8)); 
 }
 
-/* Buttons */
-.btns {
-    text-align: right; 
-    margin-top: 10px; 
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
 }
 
-.btns2 {
-    text-align: right;
-    margin-top: -100px;
-    margin-right: 10px;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-
-/* Text Title*/
-@keyframes rainbow-text {
-    0% {
-        color: #000000;
-    }
-    10% {
-        color: rgb(65, 65, 65);
-    }
-    25% {
-        color: #666666;
-    }
-    35% {
-        color: rgb(163, 163, 163)
-    }
-    50% {
-        color: #ffffff;
-    }
-    60% {
-        color: rgb(163, 163, 163);
-    }
-    75% {
-        color:#666666;
-    }
-    85% {
-        color: rgb(65, 65, 65);
-    }
-    100% {
-        color: #000000;
-    }
+/* Header styles */
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
 }
 
-.text-fw {
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    margin: 0;
+}
+
+.site-slogan {
+    margin-top: 5px;
+}
+
+/* Navigation buttons */
+.user-buttons,
+.guest-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Main content styles */
+.main-content {
+    padding: 20px 0;
+}
+
+/* Topics section */
+.topics-section {
+    background-color: #f9f9f9;
+    padding: 30px 0;
+}
+
+.section-title {
+    color: #333;
+}
+
+/* Footer styles */
+.footer {
+    background-color: #333;
+    color: #fff;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(68, 68, 68, 0.3);
-    animation: rainbow-text 20s linear infinite;
+    padding: -11px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

@@ -9,6 +9,7 @@ requests = "*"
 pytz = "*"
 datetime = "*"
 uuid = "*"
+mysqlclient = "*"
 
 [dev-packages]
 
