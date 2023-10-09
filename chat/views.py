@@ -30,32 +30,24 @@ from django.shortcuts import get_object_or_404
 @login_required
 def createRoom(request):
     form = CreateRoom()
-
-    if request.method == 'POST':
-        form = CreateRoom(request.POST)
-        if form.is_valid():
-            # Get the selected topic name from the form
-            topic_name = form.cleaned_data['topic']
-
-            # Try to get the existing topic
-            topic_instance, created = Topic.objects.get_or_create(name=topic_name)
-
-            room = Room(
-                host=request.user,
-                topic=topic_instance,
-                name=form.cleaned_data['name'],
-                description=form.cleaned_data['description']
-            )
-
-            room.save()
-
-            return redirect('chats')
-        else:
-            print(form.errors)
-
     topics = Topic.objects.all()
-    context = {'form': form, 'topics': topics}
-    return render(request, 'chats.html', context)
+    if request.method == 'POST':
+        topic_name = request.POST.get('topic')
+        topic, create = Topic.objects.get_or_create(name=topic_name)
+        
+        Room.objects.create(
+            host = request.user,
+            topic = topic,
+            name = request.POST.get('name'),
+            description = request.POST.get('description')
+        )
+        if form.is_valid():
+            room = form.save(commit=False)
+            room.save()
+        return redirect('buy_stocks')
+        
+    context = {'form': form, 'topics':topics}
+    return render(request,'chats.html', context)
 
 
 @login_required
