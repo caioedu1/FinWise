@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% load static %}
+        {% block styles %}
+            <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
+        {% endblock %}
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    </head>
     <main class="delete-item layout">
         <div class="container">
             <div class="layout__box">
@@ -26,7 +36,7 @@
                         </div>
 
                         <div class="for__group">
-                            <input class="btn btn--main" type="submit" value="Confirm" />
+                            <input class="btn btn-primary" type="submit" value="Confirm" />
                         </div>
 
                     </form>
@@ -35,4 +45,5 @@
         </div>
     </main>
     <script src="script.js"></script>
+</html>
 {% endblock content %}

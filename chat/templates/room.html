@@ -1,127 +1,18 @@
 {% extends 'base.html' %}
 
-
-{% block styles %}
-  {{ block.super }}
-  <style>
-    body {
-      background-color: #f8f9fa; /* Use a background color that fits your design */
-    }
-
-    .head {
-      background-color: #343a40; /* Dark background color for the header */
-      padding: 20px;
-      color: white; /* Text color for the header */
-    }
-
-    .btns a {
-      margin-right: 10px; /* Add some spacing between buttons */
-    }
-
-    .profile-page {
-      padding: 20px;
-    }
-
-    .room__top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #343a40;
-      padding: 10px;
-      color: white;
-    }
-
-    .back-link {
-      text-decoration: none;
-      color: white;
-      margin-right: 10px;
-    }
-
-    .room-title {
-      margin: 0;
-    }
-
-    .icon-link {
-      color: white;
-      margin-left: 10px;
-      text-decoration: none;
-    }
-
-    .icon {
-      vertical-align: middle;
-    }
-
-    .room__box,
-    .participants {
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      margin-top: 20px;
-      padding: 20px;
-    }
-
-    .room__header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .room__info {
-      flex-grow: 1;
-    }
-
-    .room__author img,
-    .avatar img {
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
-    }
-
-    .room__conversation {
-      border-top: 1px solid #eee;
-      margin-top: 20px;
-      padding-top: 20px;
-    }
-
-    .threads {
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    .thread {
-      border-bottom: 1px solid #eee;
-      padding: 10px 0;
-    }
-
-    .thread__delete {
-      float: right;
-      cursor: pointer;
-    }
-
-    .participants__top {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .participant {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: #343a40;
-      margin-bottom: 10px;
-    }
-
-    .avatar--medium img {
-      width: 50px;
-      height: 50px;
-      margin-right: 10px;
-    }
-
-  </style>
-{% endblock %}
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block styles %}
+      {{ block.super }}
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'styles/room.css' %}">
+      <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% endblock %}
+</head>
+<body>
 {% block content %}
   <main class="profile-page layout layout--2">
     <div class="container">
@@ -182,19 +73,19 @@
         <div class="room__box scroll">
           <div class="room__header scroll">
             <div class="room__info">
-              <h3 style="color: white;">{{room.name}}</h3>
-              <span style="color: white;">{{room.created|timesince}}</span>
+              <h3 style="color: black;">{{room.name}}</h3>
+              <span style="color: black;">{{room.created|timesince}}</span>
             </div>
             <div class="room__hosted">
-              <p style="color: white;">Hosted By</p>
-              <a href="#" class="room__author">
+              <p style="color: black;">Hosted By</p>
+              <a href="{% url 'user_profile' user.id %}" class="room__author">
                 <div class="avatar avatar--small">
                   <img src="{{room.host.avatar.url}}" />
                 </div>
                 <span>@{{room.host.username}}</span>
               </a>
             </div>
-            <span class="room__topics" style="color: white;">{{room.topic}}</span>
+            <span class="room__topics" style="color: black;">{{room.topic.name}}</span>
           </div>
           <div class="room__conversation">
             <div class="threads scroll">
@@ -209,7 +100,7 @@
                       </div>  
                       <span>@{{message.user.username}}</span>
                     </a>
-                    <span class="thread__date" style="color: white;">{{message.created|timesince}} ago</span>
+                    <span class="thread__date" style="color: black;">{{message.created|timesince}} ago</span>
                   </div>
                   {% if request.user == message.user %}
                     <a href="{% url 'delete_message' message.id %}">
@@ -225,7 +116,7 @@
                   {% endif %}
                 </div>
                 
-                  <div class="thread__details" style="color: white;">
+                  <div class="thread__details" style="color: black;">
                     {{message.body}}
                   </div>
               </div>
@@ -245,7 +136,7 @@
 
       <!--   Start -->
       <div class="participants">
-        <h3 class="participants__top" style="color: white;">Participants <span>{{room.participants.count}}</span></h3>
+        <h3 class="participants__top" style="color: black;">Participants <span>{{room.participants.count}}</span></h3>
         <div class="participants__list scroll">
           {% for user in participants %}
             <a href="#" class="participant">
@@ -253,8 +144,7 @@
                 <img src="{{user.avatar.url}}" />
               </div>
               <p>
-                {{user.username}}
-                <span>@{{user.username}}</span>
+                <span>&#64;{{user.username}}</span>
               </p>
             </a>
           {% endfor %}
@@ -263,5 +153,6 @@
       <!--  End -->
     </div>
   </main>
-  <script src="script.js"></script>
+</body>
 {% endblock content %}
+</html>

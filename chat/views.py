@@ -6,8 +6,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 # Create your views here.
 
-def home(request, pk=None):
-    room = Room.objects.get(id=pk)
+def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     rooms = Room.objects.filter(
         Q(topic__name__icontains= q) |
@@ -19,35 +18,29 @@ def home(request, pk=None):
     room_count = rooms.count()
     room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
     
-    
     context = {'rooms': rooms, 'topics':topics, 'room_count': room_count, 'room_messages': room_messages}
     return render(request, 'home.html', context)
-
-from django.shortcuts import get_object_or_404
-
-from django.shortcuts import get_object_or_404
 
 @login_required
 def createRoom(request):
     form = CreateRoom()
     topics = Topic.objects.all()
+
     if request.method == 'POST':
         topic_name = request.POST.get('topic')
-        topic, create = Topic.objects.get_or_create(name=topic_name)
-        
-        Room.objects.create(
-            host = request.user,
-            topic = topic,
-            name = request.POST.get('name'),
-            description = request.POST.get('description')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+
+        room = Room.objects.create(
+            host=request.user,
+            topic=topic,
+            name=request.POST.get('name'),
+            description=request.POST.get('description')
         )
-        if form.is_valid():
-            room = form.save(commit=False)
-            room.save()
-        return redirect('buy_stocks')
-        
-    context = {'form': form, 'topics':topics}
-    return render(request,'chats.html', context)
+
+        return redirect('room', pk=room.id)
+
+    context = {'form': form, 'topics': topics}
+    return render(request, 'chats.html', context)
 
 
 @login_required
@@ -109,7 +102,7 @@ def deleteMessage(request, pk):
     
     if request.method == 'POST':
         message.delete()
-        return redirect('home')
+        return redirect('room', pk=message.room.pk)
     return render(request, 'delete.html', {'obj':message})
 
 

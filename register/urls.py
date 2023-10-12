@@ -8,5 +8,6 @@ urlpatterns = [
     path('logout/', logoutUser, name='logout'),
     
     path('user_profile/<str:pk>/', userProfile, name='user_profile')
+    # path('update_user/<str:pk>/', )
 ]
 

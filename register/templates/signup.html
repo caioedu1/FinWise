@@ -13,19 +13,25 @@
     </head>
     <body>
       {% block content %}
-        <div class="signup">
-          <h3 style="color: white;">Sign Up</h3>
-          <form method="POST" class="mb-3">
+      <div class="signup">
+        <h3 style="color: black;">Sign Up</h3>
+        <form method="POST" class="mb-3">
+
             <div class="row">
               <div class="col">
-                <label for="{{ form.name.id }}"></label>
-                  {{ form.name }}
+                <label for="{{ form.first_name.id }}"></label>
+                {{ form.first_name }}
               </div>
-
+              
               <div class="col">
+                <label for="{{ form.last_name.id }}"></label>
+                {{ form.last_name}}
+              </div>
+            </div>
+
+            <div class="mb-3">
                 <label for="{{ form.username.id }}"></label>
                 {{ form.username }}
-              </div>
             </div>
             
             <div class="mb-3">
@@ -40,15 +46,14 @@
               <div class="col">
                 <label for="{{ form.password1.id }}"></label>
                 {{ form.password1 }}
-                
               </div>
               
               <div class="col">
                 <label for="{{ form.password2.id }}"></label>
                 {{ form.password2 }}
               </div>
-              
             </div>
+            
             
             {% csrf_token %}
             <br>
@@ -61,7 +66,6 @@
                   {% endfor %}
               </div>
             {% endif %}
-          
           
             <button type="submit" class="btn btn-primary">Register</button>
 

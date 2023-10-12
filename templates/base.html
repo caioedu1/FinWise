@@ -14,15 +14,14 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <h1 class="site-title">FinWise</h1>
+            <h1 class="site-title"><a href="{% url 'home' %}" style="text-decoration: none; color: white;">FinWise</a></h1>
             <h2 class="site-slogan">Dream Thrive Repeat</h2>
             {% if user.is_authenticated %}
                 <div class="user-buttons">
-                    <a href='{% url "logout" %}' class="btn btn-primary btn-sm" role="button">Logout</a>
+                    <a href="{% url 'create_room' %}" class="btn btn-primary btn-sm" role="button">Create room</a>
+                    <a href="{% url 'logout' %}" class="btn btn-primary btn-sm" role="button">Logout</a>
                     <a href="{% url 'buy_stocks' %}" class="btn btn-primary btn-sm" role="button">Buy stocks</a>
-                    <a href="{% url 'sell_stocks' %}" class="btn btn-primary btn-sm" role="button">Sell stocks</a>
-                    {% comment %} <a href="{% url 'chat' %}" class="btn btn-primary btn-sm" role="button">Home</a> {% endcomment %}
-                </div>
+                    <a href="{% url 'sell_stocks' %}" class="btn btn-primary btn-sm" role="button">Sell stocks</a>                </div>
             {% else %}
                 <div class="guest-buttons">
                     {% if '/register' in request.path %}
@@ -32,6 +31,7 @@
                     {% endif %}
                 </div>
             {% endif %}
+
         </div>
     </header>
 

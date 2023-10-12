@@ -9,10 +9,11 @@ from django.contrib.auth import password_validation
 class MyUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['name', 'username', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
         
         widgets = {
-                'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
+                'first_name': forms.TextInput(attrs={}),
+                'last_name': forms.TextInput(attrs={}),
                 'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
                 'email': forms.EmailInput(attrs={'class': 'form-control', 'aria-describedby': 'emailHelp', 'placeholder': 'Email'}),
                 'password1': forms.PasswordInput(attrs={}),
@@ -23,7 +24,12 @@ class MyUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(MyUserCreationForm, self).__init__(*args, **kwargs)
         
-        # Set the placeholder attribute for password1 and password2 fields
+        # Set the placeholder attribute for some fields
+        self.fields['first_name'].widget.attrs['placeholder'] = 'First name'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'Last name'
+        self.fields['first_name'].widget.attrs['class'] = 'form-control'
+        self.fields['last_name'].widget.attrs['class'] = 'form-control'
+        
         self.fields['password1'].widget.attrs['placeholder'] = 'Password'
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm password'
         self.fields['password1'].widget.attrs['class'] = "form-control"
@@ -52,3 +58,8 @@ class MyUserLoginForm(forms.Form):
     password = forms.CharField(max_length=200, widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'exampleInputPassword1'}))
     remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input', 'id': 'exampleCheck1'}))
       
+class MyUserUpdateForm(forms.Form):
+    name = forms.CharField(max_length=200)
+    username = forms.CharField(max_length=200)
+    password1 = forms.CharField(max_length=200, widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'exampleInputPassword1'}))
+    password2 = forms.CharField(max_length=200, widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'exampleInputPassword2'})) 

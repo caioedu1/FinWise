@@ -1,0 +1,125 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+}
+
+.head {
+    background-color: #343a40;
+    padding: 20px;
+    color: white;
+}
+
+.container {
+    margin: 20px auto;
+}
+
+.room__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #343a40;
+    padding: 10px;
+    color: white;
+}
+
+.room__top a {
+    text-decoration: none;
+    color: white;
+}
+
+.room__topLeft h3 {
+    margin: 0;
+}
+
+.room__box,
+.participants {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.room__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.room__info h3 {
+    margin: 0;
+    color: black;
+}
+
+.room__info span {
+    color: black;
+}
+
+.room__hosted p,
+.room__topics {
+    color: black;
+}
+
+.room__hosted a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+}
+
+.room__hosted span {
+    margin-left: 5px;
+}
+
+.room__conversation {
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.threads {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.thread {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.thread__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.thread__authorInfo {
+    display: flex;
+    align-items: center;
+}
+
+.thread__authorInfo span {
+    margin-left: 5px;
+}
+
+.thread__date {
+    color: black ;
+}
+
+.thread__details {
+    color: black;
+}
+
+.room__message {
+    margin-top: 20px;
+}
+
+input[name="body"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}

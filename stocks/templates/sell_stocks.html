@@ -1,18 +1,51 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sell stocks</title>
-</head>
-<body>
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sell</button>
-    </form>
-{% endblock content %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy stocks</title>
+    {% load static %}
+    {% block styles %}
+        <link rel="stylesheet" href="{% static '/styles/signup.css' %}">
+        <link rel="stylesheet" href="{% static '/styles/bootstrap.min.css' %}">
+    {% endblock %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <style>
+        .form-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 75vh;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form method="POST" action="" class="mb-3">
+            <div class="mb-3">
+                <label for="{{ form.stock_symbol.id_for_label }}" class="form-label">
+                    Stock symbol
+                </label>
+                <div class="col-8">
+                    {{ form.stock_symbol }}
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.quantity.id_for_label }}" class="form-label">
+                    Quantity
+                </label>
+                <div class="col-8">
+                    {{ form.quantity }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            {% csrf_token %}
+        </form>
+    </div>
 </body>
 </html>
+{% endblock content %}
