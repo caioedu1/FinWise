@@ -19,9 +19,10 @@
             {% if user.is_authenticated %}
                 <div class="user-buttons">
                     <a href="{% url 'create_room' %}" class="btn btn-primary btn-sm" role="button">Create room</a>
-                    <a href="{% url 'logout' %}" class="btn btn-primary btn-sm" role="button">Logout</a>
                     <a href="{% url 'buy_stocks' %}" class="btn btn-primary btn-sm" role="button">Buy stocks</a>
-                    <a href="{% url 'sell_stocks' %}" class="btn btn-primary btn-sm" role="button">Sell stocks</a>                </div>
+                    <a href="{% url 'sell_stocks' %}" class="btn btn-primary btn-sm" role="button">Sell stocks</a>
+                    <a href="{% url 'logout' %}" class="btn btn-primary btn-sm" role="button">Logout</a>                       
+                </div>
             {% else %}
                 <div class="guest-buttons">
                     {% if '/register' in request.path %}
@@ -38,9 +39,5 @@
     <div class="main-content">
         {% block content %}{% endblock content %}
     </div>
-
-    <footer class="footer">
-        <p>&copy; {% now "Y" %} FinWise. All rights reserved.</p>
-    </footer>
 </body>
 </html>

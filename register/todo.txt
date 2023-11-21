@@ -1,0 +1,2 @@
+1. Descobrir o motivo de não estar renderizando as imagens de avatar dos usuários [ ]
+2. Melhorar a estilização geral [ ]

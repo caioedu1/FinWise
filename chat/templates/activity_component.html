@@ -1,42 +1,126 @@
+<style>
+  .activities {
+    background-color: #f4f4f4;
+    margin: 0;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .activities__header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .activities__header h2 {
+    margin: 0;
+  }
+
+  .activities__box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  .activities__boxHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .activities__boxHeader a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar--small {
+    width: 50px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
+  .avatar--small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .activities__boxContent p {
+    margin: 10px 0;
+  }
+
+  .activities__boxRoomContent {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+
+  .activities__boxRoomContent p {
+    margin: 0;
+  }
+
+  .activities__boxRoomContent a {
+    color: #0070f3;
+    text-decoration: none;
+  }
+
+  .activities__boxRoomContent a:hover {
+    text-decoration: underline;
+  }
+</style>
 <div class="activities">
     <div class="activities__header">
       <h2>Recent Activities</h2>    
     </div>
-    {% for message in room_messages %}
-    <div class="activities__box">
-      <div class="activities__boxHeader roomListRoom__header">
-        <a href="{% url 'user_profile' message.user.id %}" class="roomListRoom__author">
-          <div class="avatar avatar--small">
-            <img src="{{message.user.avatar.url}}" />
-          </div>
-          <p>
-            @{{message.user}}
-            <span>{{message.created|timesince}} ago</span>
-          </p>
-        </a>
-
-        {% if request.user == message.user %}
-        <div class="roomListRoom__actions">
-          <a href="{% url 'delete_message' message.id %}">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-              <title>remove</title>
-              <path
-                d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z"
-              ></path>
-            </svg>
+    {% if room_messages %}
+      {% for message in room_messages %}
+      <div class="activities__box">
+        <div class="activities__boxHeader roomListRoom__header">
+          <a href="{% url 'user_profile' message.user.id %}" class="roomListRoom__author">
+            <div class="avatar avatar--small">
+              <img src="{{message.user.avatar.url}}" alt="Avatar"/>
+            </div>
+            <p>
+              @{{message.user}}
+              <span>{{message.created|timesince}} ago</span>
+            </p>
           </a>
-        </div>
-        {% endif %}
 
-      </div>
-      <div class="activities__boxContent">
-        <p>replied to post “<a href="{% url 'room' message.room.id %}">{{message.room}}</a>”</p>
-        <div class="activities__boxRoomContent">
-          {{message.body}}
+          {% if request.user == message.user %}
+          <div class="roomListRoom__actions">
+            <a href="{% url 'delete_message' message.id %}">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="20" height="32" viewBox="0 0 32 32">
+                <title>remove</title>
+                <path
+                  d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+          {% endif %}
+
+        </div>
+        <div class="activities__boxContent">
+          <p>said in room “<a href="{% url 'room' message.room.id %}">{{message.room.name}}</a>”</p>
+          <div class="activities__boxRoomContent">
+            Message:
+            {{message.body}}
+          </div>
         </div>
       </div>
-    </div>
-    {% endfor %}
+      {% endfor %}
+    {% else %}
+      No recent activities
+    {% endif %}
 
 </div>
 

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <main class="profile-page layout layout--3">
@@ -9,7 +10,11 @@
         <div class="profile">
           <div class="profile__avatar">
             <div class="avatar avatar--large active">
-              <img src="{{user.avatar.url}}" />
+                {% if avatar_url %}
+                    <img src="{{ avatar_url }}" alt="Avatar">
+                {% else %}
+                    <img src="{% static 'imgs/avatar.png' %}" alt="Default Avatar">
+                {% endif %}
             </div>
           </div>
           <div class="profile__info">
@@ -26,20 +31,20 @@
             </p>
           </div>
         </div>
-
+        
         <div class="roomList__header">
           <div>
-            <h2>Study Rooms Hosted by {{user.username}}</a>
+            <h2>Chat Rooms Hosted by {{user.username}}</a>
             </h2>
           </div>
         </div>
-        {% include 'base/feed_component.html' %}
+        {% include 'feed_component.html' %}
 
       </div>
       <!-- Room List End -->
 
       <!-- Activities Start -->
-      {% include 'base/activity_component.html' %}
+      {% include 'activity_component.html' %}
       <!-- Activities End -->
     </div>
   </main>

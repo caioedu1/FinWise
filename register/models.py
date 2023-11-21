@@ -1,11 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+def user_avatar_path(instance, filename):
+    # Define o caminho onde os avatares serão salvos
+    return f"avatars/user_{instance.id}/{filename}"
+
 class User(AbstractUser):
-    first_name = models.CharField(max_length=200, null=False)
-    last_name = models.CharField(max_length=200, null=False)
-    email = models.EmailField(unique=True, null=False)
-    cash = models.DecimalField(max_digits=10, decimal_places=2, default=10000)
-
+    name = models.CharField(max_length=200, null=True)
+    email = models.EmailField(unique=True, null=True)
+    bio = models.TextField(null=True)
     
-
+    avatar = models.ImageField(upload_to=user_avatar_path, null=True, default="static/imgs/avatar.png")
+    
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['name']

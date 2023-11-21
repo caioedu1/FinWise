@@ -1,10 +1,8 @@
-/* Reset some default browser styles */
 body, h1, h2, p {
     margin: 0;
     padding: 0;
 }
 
-/* Global styles */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -15,7 +13,6 @@ body {
     margin: 0 auto;
 }
 
-/* Header styles */
 .header {
     background-color: #333;
     color: #fff;
@@ -36,19 +33,17 @@ body {
     margin-top: 5px;
 }
 
-/* Navigation buttons */
 .user-buttons,
 .guest-buttons {
     display: flex;
     gap: 10px;
 }
 
-/* Main content styles */
+
 .main-content {
     padding: 20px 0;
 }
 
-/* Topics section */
 .topics-section {
     background-color: #f9f9f9;
     padding: 30px 0;
@@ -56,15 +51,4 @@ body {
 
 .section-title {
     color: #333;
-}
-
-/* Footer styles */
-.footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: -11px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }

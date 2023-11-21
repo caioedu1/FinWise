@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from .models import Room, Topic, Message, User
 from .forms import CreateRoom, User
 from django.db.models import Q
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required(login_url="login")
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     rooms = Room.objects.filter(
@@ -21,7 +22,7 @@ def home(request):
     context = {'rooms': rooms, 'topics':topics, 'room_count': room_count, 'room_messages': room_messages}
     return render(request, 'home.html', context)
 
-@login_required
+@login_required(login_url="login")
 def createRoom(request):
     form = CreateRoom()
     topics = Topic.objects.all()
@@ -43,7 +44,7 @@ def createRoom(request):
     return render(request, 'chats.html', context)
 
 
-@login_required
+@login_required(login_url="login")
 def room(request, pk):
     room = Room.objects.get(id=pk)
     room_messages = room.message_set.all().order_by('-created')
@@ -60,7 +61,8 @@ def room(request, pk):
     context = {'room': room, 'room_messages': room_messages, 'participants': participants}
     return render(request, 'room.html', context)
 
-@login_required(login_url='login')
+
+@login_required(login_url="login")
 def updateRoom(request, pk):
     room = Room.objects.get(id=pk)
     form = Room(instance=room)
@@ -81,7 +83,8 @@ def updateRoom(request, pk):
     context = {'form':form, 'topics':topics}
     return render(request, 'room_form.html', context)
 
-@login_required
+
+@login_required(login_url="login")
 def deleteRoom(request, pk):
     room = Room.objects.get(id=pk)
     
@@ -93,7 +96,8 @@ def deleteRoom(request, pk):
         return redirect('home')
     return render(request, 'delete.html', {'obj':room})
 
-@login_required
+
+@login_required(login_url="login")
 def deleteMessage(request, pk):
     message = Message.objects.get(id=pk)
     
@@ -106,18 +110,7 @@ def deleteMessage(request, pk):
     return render(request, 'delete.html', {'obj':message})
 
 
-@login_required
-def updateUser(request, pk):
-    user = request.user
-    form = User(instance=user)
-    
-    if request.method == 'POST':
-        form = User(request.POST, request.FILES, instance=user)
-        if form.is_valid():
-            form.save()
-            return redirect('user_profile', pk= user.id)
-    return render(request, 'update_user.html', {'form':form,})
-
+@login_required(login_url="login")
 def topicsPage(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     print(f'Query string received: {q}')  # Debug message
@@ -125,6 +118,8 @@ def topicsPage(request):
     topics = Topic.objects.filter(name__icontains=q)
     return render(request, 'topics.html', {'topics': topics})
 
+
+@login_required(login_url="login")
 def activityPage(request):
     room_messages = Message.objects.all()
     return render(request, 'activity.html', {'room_messages':room_messages})

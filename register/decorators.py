@@ -9,7 +9,7 @@ def login_forbidden(view_func):
     """
     def _wrapped_view(request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('buy_stocks')
+            return redirect('home')
         else:
             # Caso contrário, execute a view normalmente
             return view_func(request, *args, **kwargs)

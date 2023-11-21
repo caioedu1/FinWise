@@ -16,7 +16,7 @@ from decimal import Decimal
 # Create your views here.
 
 
-@login_required
+@login_required(login_url="login")
 def buy_stocks(request):
     form = BuyStocksForm()
 
@@ -100,7 +100,7 @@ def buy_stocks(request):
         return render(request, "buy_stocks.html", context={"form": form})
 
 
-@login_required
+@login_required(login_url="login")
 def sell_stocks(request):
     form = SellStocksForm()
 
