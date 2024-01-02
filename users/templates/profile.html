@@ -4,14 +4,12 @@
 {% block content %}
 <main class="profile-page layout layout--3">
     <div class="container">
-      {% include 'topics_component.html' %}
-
       <div class="roomList">
         <div class="profile">
           <div class="profile__avatar">
             <div class="avatar avatar--large active">
-                {% if avatar_url %}
-                    <img src="{{ avatar_url }}" alt="Avatar">
+                {% if user.avatar_url %}
+                    <img src="{{ user.avatar_url }}" alt="Avatar">
                 {% else %}
                     <img src="{% static 'imgs/avatar.png' %}" alt="Default Avatar">
                 {% endif %}
@@ -21,7 +19,7 @@
             <h3>{{user.username}}</h3>
             <p>@{{user.username}}</p>
             {% if request.user == user %}
-              <a href="{% url 'update_user' user.id %}" class="btn btn--main btn--pill">Edit Profile</a>
+              <a href="{% url 'update_user' user.id %}" class="btn btn-secondary">Edit Profile</a>
             {% endif %}
           </div>
           <div class="profile__about">

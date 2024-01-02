@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 def user_avatar_path(instance, filename):
-    # Define o caminho onde os avatares serão salvos
     return f"avatars/user_{instance.id}/{filename}"
 
 class User(AbstractUser):
@@ -12,5 +11,5 @@ class User(AbstractUser):
     
     avatar = models.ImageField(upload_to=user_avatar_path, null=True, default="static/imgs/avatar.png")
     
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["name"]

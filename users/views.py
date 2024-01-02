@@ -7,7 +7,6 @@ from .decorators import login_forbidden
 from .models import User
 from chat.models import Topic
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
 
 
 @login_forbidden
@@ -59,7 +58,7 @@ def userProfile(request, pk):
     user = User.objects.get(id=pk)
     rooms = user.room_set.all()
     room_messages = user.message_set.all()
-    avatar_url = user.avatar if user.avatar else None
+    avatar_url = user.avatar.url if user.avatar else None
     topics = Topic.objects.all()
     context = {
         'user': user, 
@@ -80,5 +79,5 @@ def updateUser(request, pk):
         form = MyUserUpdateForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('user_profile', pk= user.id)
+            return redirect('user_profile', pk=user.id)
     return render(request, 'update_user.html', {'form':form})

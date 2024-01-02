@@ -4,7 +4,7 @@ from django.http import JsonResponse, HttpResponse
 from .forms import BuyStocksForm, SellStocksForm
 import requests
 from .models import BuyStocks, SellStocks, UsersStocks
-from register.models import User
+from users.models import User
 from django.contrib.auth.decorators import login_required
 import datetime
 import pytz

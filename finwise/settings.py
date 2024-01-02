@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'register.apps.RegisterConfig',
+    'users.apps.UsersConfig',
     'stocks.apps.StocksConfig',
     'chat.apps.ChatConfig',
 ]
@@ -132,11 +132,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTHENTICATION_BACKENDS = [ 
-    'register.backends.EmailBackend',
+    'users.backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend'
 ]
-
-AUTH_USER_MODEL = 'register.User'
+''
+AUTH_USER_MODEL = 'users.User'
 
 
 SILENCED_SYSTEM_CHECKS = ["staticfiles.W004"]
